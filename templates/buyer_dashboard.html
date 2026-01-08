@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - Farmify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🌾 Farmify</h1>
+            <div class="nav-links">
+                <span class="user-name">Welcome, {{ session.user_name }}</span>
+                <a href="{{ url_for('buyer_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('view_crops') }}">Marketplace</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <h1>Buyer Dashboard</h1>
+            
+            <div class="dashboard-actions">
+                <a href="{{ url_for('view_crops') }}" class="btn btn-primary">Browse Marketplace</a>
+            </div>
+            
+            <div class="section-box">
+                <h2>Welcome to Farmify Buyer Portal</h2>
+                <p>Explore fresh crops directly from farmers. Get best prices without intermediaries.</p>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>🌾 Browse Crops</h3>
+                        <p>View all available crops with transparent pricing</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📞 Direct Contact</h3>
+                        <p>Get farmer contact details for direct communication</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>💰 Fair Pricing</h3>
+                        <p>No middlemen, just fair prices for quality produce</p>
+                    </div>
+                </div>
+                
+                <div class="cta-section">
+                    <h3>Ready to buy fresh crops?</h3>
+                    <a href="{{ url_for('view_crops') }}" class="btn btn-primary">Go to Marketplace</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

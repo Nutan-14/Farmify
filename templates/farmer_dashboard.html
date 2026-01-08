@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - Farmify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🌾 Farmify</h1>
+            <div class="nav-links">
+                <span class="user-name">Welcome, {{ session.user_name }}</span>
+                <a href="{{ url_for('farmer_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('view_crops') }}">Marketplace</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <h1>Farmer Dashboard</h1>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <div class="dashboard-actions">
+                <a href="{{ url_for('add_crop') }}" class="btn btn-primary">Add New Crop</a>
+                <a href="{{ url_for('view_crops') }}" class="btn btn-secondary">View Marketplace</a>
+            </div>
+            
+            <div class="section-box">
+                <h2>My Listed Crops</h2>
+                
+                {% if crops %}
+                    <table class="crops-table">
+                        <thead>
+                            <tr>
+                                <th>Crop Name</th>
+                                <th>Quantity</th>
+                                <th>Price (per kg)</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for crop in crops %}
+                            <tr>
+                                <td>{{ crop[2] }}</td>
+                                <td>{{ crop[3] }}</td>
+                                <td>₹{{ crop[4] }}</td>
+                                <td>{{ crop[5] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="no-data">No crops listed yet. Add your first crop!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Farmify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🌾 Farmify</h1>
+            <div class="nav-links">
+                <span class="user-name">Welcome, {{ session.user_name }}</span>
+                {% if session.user_type == 'farmer' %}
+                    <a href="{{ url_for('farmer_dashboard') }}">Dashboard</a>
+                {% else %}
+                    <a href="{{ url_for('buyer_dashboard') }}">Dashboard</a>
+                {% endif %}
+                <a href="{{ url_for('view_crops') }}">Marketplace</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="container">
+            <h1>Crop Marketplace</h1>
+            
+            <div class="section-box">
+                <h2>Available Crops</h2>
+                
+                {% if crops %}
+                    <div class="crops-grid">
+                        {% for crop in crops %}
+                        <div class="crop-card">
+                            <div class="crop-header">
+                                <h3>{{ crop[2] }}</h3>
+                                <span class="crop-price">₹{{ crop[4] }}/kg</span>
+                            </div>
+                            <div class="crop-details">
+                                <p><strong>Quantity:</strong> {{ crop[3] }}</p>
+                                <p><strong>Description:</strong> {{ crop[5] }}</p>
+                            </div>
+                            <div class="farmer-details">
+                                <h4>Farmer Details:</h4>
+                                <p><strong>Name:</strong> {{ crop[6] }}</p>
+                                <p><strong>Phone:</strong> {{ crop[7] }}</p>
+                                <p><strong>Location:</strong> {{ crop[8] }}</p>
+                            </div>
+                            {% if session.user_type == 'buyer' %}
+                            <div class="crop-actions">
+                                <p class="contact-info">Contact farmer directly to purchase</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-data">No crops available at the moment. Check back later!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

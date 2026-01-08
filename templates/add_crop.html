@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Crop - Farmify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🌾 Farmify</h1>
+            <div class="nav-links">
+                <span class="user-name">Welcome, {{ session.user_name }}</span>
+                <a href="{{ url_for('farmer_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Add New Crop</h2>
+            
+            <form method="POST" action="{{ url_for('add_crop') }}">
+                <div class="form-group">
+                    <label for="crop_name">Crop Name</label>
+                    <input type="text" id="crop_name" name="crop_name" placeholder="e.g., Wheat, Rice, Tomato" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Quantity (in kg)</label>
+                    <input type="text" id="quantity" name="quantity" placeholder="e.g., 500 kg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price (₹ per kg)</label>
+                    <input type="text" id="price" name="price" placeholder="e.g., 25" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Quality, organic status, harvest date, etc." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Add Crop</button>
+                <a href="{{ url_for('farmer_dashboard') }}" class="btn btn-secondary btn-full">Cancel</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
