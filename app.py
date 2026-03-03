@@ -100,8 +100,8 @@ def buyer_register():
             flash('Name must contain only alphabetic characters and spaces!', 'error')
             return redirect(url_for('buyer_register'))
         email = request.form['email']
-        if not email.endswith('@example.com'):
-            flash('Email must be from the domain @example.com!', 'error')
+        if not email.endswith('@gmail.com'):
+            flash('Email must be from the domain @gmail.com!', 'error')
             return redirect(url_for('buyer_register'))
         password = request.form['password']
         import re                               
